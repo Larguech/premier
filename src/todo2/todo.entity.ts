@@ -3,7 +3,7 @@ import { StatusEnum } from './status.enum'; // Assurez-vous d'avoir défini l'en
 import { BaseEntity } from './base.entity'; // Importe la classe de base ex6
 
 @Entity('todos2') // Nom de la table
-export class TodoEntity {
+export class TodoEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -12,18 +12,6 @@ export class TodoEntity {
 
   @Column({ length: 255 })
   description: string;
-
-  // Colonne createdAt qui ne peut être modifiée une fois créée
-  @CreateDateColumn({ type: 'timestamp' })
-  createdAt: Date;
-
-  // Colonne updatedAt automatiquement mise à jour par TypeORM
-  @UpdateDateColumn({ type: 'timestamp' })
-  updatedAt: Date;
-
-  // Colonne deletedAt automatiquement gérée par TypeORM pour la suppression douce (soft delete)
-  @DeleteDateColumn({ type: 'timestamp', nullable: true })
-  deletedAt: Date | null;
 
   @Column({
     type: 'enum',
